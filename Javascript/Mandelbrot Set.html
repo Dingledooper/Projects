@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Mandelbrot Set</title>
+
+</head>
+
+<body>
+
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+
+    <canvas id="myCanvas" width="1280" height="600"></canvas>
+
+    <script>
+        // The equation for a Mandelbrot set is Z = Z^2 + C, where C is a + bi, which is a complex number
+
+        var canv = document.getElementById("myCanvas");
+        var ctx = canv.getContext("2d");
+
+        var inMandelbrot = function(x, y) {
+
+            // set variables for x and y coordinates
+            var realC = x;
+            var imagC = y;
+
+            // num of iterations
+            var maxIter = 1000;
+
+            // formula for calculating whether pixel is in mandelbrot set
+            for (i = 0; i < maxIter; i++) {
+                var tempRealC = realC * realC - imagC * imagC + x;
+                var tempImagC = 2 * realC * imagC + y;
+
+                realC = tempRealC;
+                imagC = tempImagC;
+
+                // colourful
+                if (realC * realC + imagC * imagC > 4) {
+                    return i / maxIter * 700;
+                }
+            }
+            // black
+            return 0;
+        };
+
+        // changing size of mandelbrot set
+        var magnify = 300;
+
+        // adjust mandelbrot location
+        var appX = 2.5;
+        var appY = 1;
+
+        var drawMandelbrot = function() {
+            // drawing black pixels that satisfy mandelbrot
+            for (x = 0; x < canv.width; x++) {
+                for (y = 0; y < canv.height; y++) {
+
+                    var belongInSet = inMandelbrot(x / magnify - appX, y / magnify - appY);
+                    if (belongInSet === 0) {
+                        // draw black pixel
+                        ctx.fillStyle = "black";
+                        ctx.fillRect(x, y, 1, 1);
+                    } else {
+                        // draw colourful pixel
+                        ctx.fillStyle = "hsl(180, 100%, " + belongInSet + "%)";
+                        ctx.fillRect(x, y, 1, 1);
+                    }
+                }
+            }
+        };
+        drawMandelbrot();
+    </script>
+
+</body>
+
+</html>
