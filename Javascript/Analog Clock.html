@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Analog Clock</title>
+
+</head>
+
+<body>
+
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+        }
+    </style>
+    
+    <div id="showTime"></div>
+    <canvas id="myCanvas" width="1280" height="610"></canvas>
+
+    <script>
+        var canv = document.getElementById("myCanvas");
+        var ctx = canv.getContext("2d");
+        
+        // get current time
+        var hrs, mins, secs, mils;
+        var time = function() {
+            var date = new Date();
+            mils = date.getTime();
+            secs = mils / 1000;
+            mins = secs / 60;
+            hrs = mins / 60;
+        };
+        
+        // canvas width and height constants
+        var cw = canv.width / 2;
+        var ch = canv.height / 2;
+
+        // draw clock border and center clock
+        var circle = function() {
+            ctx.beginPath();
+            ctx.arc(cw, ch, 250, 0, 2 * Math.PI);
+            ctx.lineWidth = "10";
+            ctx.globalAlpha = 1;
+            ctx.strokeStyle = "red";
+            ctx.fillStyle = "slategray";
+            ctx.closePath();
+            ctx.stroke();
+            ctx.fill();
+            
+            for (i = 0; i < 60; i++) {
+                var r = 135;
+                var l = 5;
+                ctx.strokeStyle = "rgba(0, 0, 0, 0.25)";
+                ctx.lineWidth = 2;
+                
+                if (i % 5 === 0) {
+                    r = -l;
+                    l *= 2;
+                    ctx.strokeStyle = "rgba(0, 0, 0, 0.5)";
+                    ctx.lineWidth = 4;
+                } 
+                
+                ctx.beginPath();
+                ctx.moveTo(cw + Math.cos(Math.PI / 30 * i) * 240, 
+                           ch + Math.sin(Math.PI / 30 * i) * 240);
+                ctx.lineTo(cw + Math.cos(Math.PI / 30 * i) * 220,
+                           ch + Math.sin(Math.PI / 30 * i) * 220);
+                ctx.lineCap = "round";
+                ctx.stroke();
+                ctx.closePath();
+            }
+            
+            for (j = 1; j <= 12; j++) {
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle"; 
+                ctx.font = "20px Segoe UI Semibold";
+                ctx.fillStyle = "black";
+                ctx.fillText(j, cw + Math.cos(Math.PI / 6 * (j - 3)) * 200,
+                                ch + Math.sin(Math.PI / 6 * (j - 3)) * 200);
+            }
+        };
+        
+        var center = function() {
+            ctx.beginPath();
+            ctx.arc(cw, ch, 10, 0, 2 * Math.PI);
+            ctx.globalAlpha = 1;
+            ctx.fillStyle = "black";
+            ctx.closePath();
+            ctx.fill(); 
+        };
+        
+        var hand = function(time, len, lineW, color) {
+            ctx.beginPath();
+            ctx.moveTo(cw, ch);
+            ctx.lineTo(cw + Math.cos(Math.PI * 2 * (time / 60) - Math.PI / 2) * len, 
+                       ch + Math.sin(Math.PI * 2 * (time / 60) - Math.PI / 2) * len)
+            ctx.lineWidth = lineW;
+            ctx.lineCap = "round";
+            ctx.globalAlpha = "0.6";
+            ctx.strokeStyle = color;
+            ctx.stroke();
+            ctx.closePath();
+        };
+
+        var draw = function() {
+            ctx.clearRect(0, 0, cw * 2, ch * 2);
+            time();
+            circle();
+            hand(secs, 220, 6, "orange");
+            hand(mins, 180, 10, "green");
+            hand(hrs, 140, 15, "purple");
+            center();
+        };
+        setInterval(draw, 1);
+        
+    </script>
+
+</body>
+
+</html>
