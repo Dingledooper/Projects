@@ -1,3 +1,8 @@
+/*
+This code was inspired from the "Minimax Algorithm in Game Theory | Set 3 (Tic-Tac-Toe AI – Finding optimal move)" website, 
+rebuilt using Java. The program gives the optimal move for any position, and either (X, O)'s turn. This is the first minimax algorithm
+I programmed, and perhaps the simplest. 
+
 class Move {
 	int x;
 	int y;
