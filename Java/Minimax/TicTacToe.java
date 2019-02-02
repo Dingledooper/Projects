@@ -1,7 +1,8 @@
 /*
 This code was inspired from the "Minimax Algorithm in Game Theory | Set 3 (Tic-Tac-Toe AI – Finding optimal move)" website, 
-rebuilt using Java. The program gives the optimal move for any position, and either (X, O)'s turn. This is the first minimax algorithm
-I programmed, and perhaps the simplest. 
+rebuilt using Java. The program gives the optimal move for any position, and either (X, O)'s turn. It uses a depth tracker to
+make the AI smarter.
+*/
 
 class Move {
 	int x;
@@ -49,17 +50,18 @@ public class TicTacToe {
 				}
 			}
 		}
+		System.out.println(bestVal);
 		return bestMove;
 	}
 	
 	private static int minimax(char[][] board, int depth, boolean isMax) {
 		int score = eval(board);
 		if (score == 10 || score == -10) {
-			return score;
+			return score - depth;
 		}
 		
 		if (!isMoves(board)) {
-			return 0;
+			return -depth;
 		}
 
 		int best = isMax ? -1000 : 1000;
@@ -79,22 +81,38 @@ public class TicTacToe {
 	private static int eval(char[][] board) {
 		for (int r = 0; r < 3; r++) {
 			if (board[r][0] == board[r][1] && board[r][1] == board[r][2]) {
-				return board[r][0] == player ? 10 : -10;
+				if (board[r][0] == player) {
+					return 10;
+				} else if (board[r][0] == opponent) {
+					return -10;
+				}
 			}
 		}
 		
 		for (int c = 0; c < 3; c++) {
 			if (board[0][c] == board[1][c] && board[1][c] == board[2][c]) {
-				return board[0][c] == player ? 10 : -10;
+				if (board[0][c] == player) {
+					return 10;
+				} else if (board[0][c] == opponent) {
+					return -10;
+				}
 			}
 		}
 		
 		if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
-			return board[0][0] == player ? 10 : -10;
+			if (board[0][0] == player) {
+				return 10;
+			} else if (board[0][0] == opponent) {
+				return -10;
+			}
 		} 
 		
 		if (board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
-			return board[0][0] == player ? 10 : -10;
+			if (board[0][0] == player) {
+				return 10;
+			} else if (board[0][0] == opponent) {
+				return -10;
+			}
 		} 
 		
 		return 0;
