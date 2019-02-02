@@ -1,4 +1,6 @@
 /*
+PROCLAIMER: Work in progress
+
 This code was inspired from the "Minimax Algorithm in Game Theory | Set 3 (Tic-Tac-Toe AI – Finding optimal move)" website, 
 rebuilt using Java. The program gives the optimal move for any position, and either (X, O)'s turn. It uses a depth tracker to
 make the AI smarter.
