@@ -4,7 +4,7 @@ rebuilt using Java. The program gives the optimal move for any position, and eit
 make the AI smarter.
 */
 
-package tictactoe;
+package evaluator;
 
 class Move {
 	int x;
