@@ -16,7 +16,7 @@ class Move {
 	}
 }
 
-public class Evaluator {
+public class TicTacToe {
 	
 	static char player = 'X';
 	static char opponent = 'O';
