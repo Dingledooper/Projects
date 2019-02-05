@@ -10,6 +10,3 @@ Many of my Python projects are bascially pen-and-paper games recreated in ASCII.
 
 # Processing
 Processing is a new language I am not quite familiar yet, so don't judge!
-
-# Java
-My main projects are ASCII board games. The computer is a perfect AI, which uses the minimax algorithm.
