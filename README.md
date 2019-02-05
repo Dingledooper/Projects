@@ -1,6 +1,6 @@
 # Projects
 Random projects I coded that I think are interesting. The projects with multiple files are kept in another folder.
-Written in Javascript, Python, Processing, and Java.
+Written in Javascript, Python, and Processing.
 
 # Javascript
 Javscript is the first programming language I ever learned. Most projects make use of a canvas.
