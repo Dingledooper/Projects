@@ -14,7 +14,7 @@ void setup() {
     float yS = random(-5, 5);
     
     fill(0, 0, 255);
-    colorMode(HSB, 255); 
+    colorMode(HSB); 
 
     circles.add(new Circle(x, y, d, clr, xS, yS));
   }
