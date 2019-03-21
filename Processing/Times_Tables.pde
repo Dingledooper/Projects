@@ -16,7 +16,7 @@ void setup() {
 
 void draw() {
   background(255);
-  colorMode(HSB, 255);
+  colorMode(HSB);
   stroke(clr % 255, 255, 255);
   
   for (int i = 0; i < 360; i++) {
