@@ -1,3 +1,7 @@
+class Circle {
+  
+  float x;
+  float y;
   float d;
   float clr;
   float xS;
@@ -34,4 +38,5 @@
       y = -r;
     }
   }
+  
 } 
